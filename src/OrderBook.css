@@ -1,0 +1,89 @@
+:root {
+  --green: #19eaab;
+  --red: #ff475d;
+}
+
+.order-book-container {
+  background-color: #101624;
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  font-family: KabeljauwRabbitXText, sans-serif;
+  border-radius: 20px;
+}
+
+.order-book-table {
+  border-collapse: collapse;
+  color: rgb(130, 141, 164);
+  width: 100%;
+  flex-direction: column;
+}
+
+.order-book-table thead tr,
+.order-book-table tbody tr {
+  display: flex;
+  flex-direction: row;
+}
+
+.order-book-table tr:hover {
+  background-color: #222937;
+}
+
+.order-book-table thead th,
+.order-book-table tbody td {
+  flex: 1;
+}
+
+.table-body {
+  font-size: 11px;
+}
+
+.header {
+  padding-top: 8px;
+}
+
+.lower-header {
+  padding: 4px;
+  padding-left: 20px;
+  font-size: 16px;
+  background-color: rgb(26, 34, 53);
+}
+
+.average-price-up {
+  color: var(--green);
+}
+
+.average-price-down {
+  color: var(--red);
+}
+
+.price {
+  text-align: left;
+}
+
+.amount {
+  text-align: right;
+}
+
+.total {
+  text-align: right;
+}
+
+.total-cell-ask {
+  background: linear-gradient(to right, rgb(50, 30, 44), rgb(50, 30, 44));
+  background-repeat: no-repeat;
+  background-size: var(--total-percentage);
+}
+
+.total-cell-bid {
+  background: linear-gradient(to right, rgb(18, 41, 46), rgb(18, 41, 46));
+  background-repeat: no-repeat;
+  background-size: var(--total-percentage);
+}
+
+.price-cell-ask {
+  color: var(--red);
+}
+
+.price-cell-bid {
+  color: var(--green);
+}

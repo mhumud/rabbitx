@@ -31,11 +31,22 @@ export default function useOrderBook() {
     const currentSubscription = subscriptionRef.current;
     if (currentSubscription) {
       currentSubscription.on("subscribed", (ctx) => {
-        HandleSubscription(ctx, setOrderBookData, sequenceRef);
+        const props = {
+          ctx,
+          setOrderBookData,
+          sequenceRef,
+        };
+        HandleSubscription(props);
       });
 
       currentSubscription.on("publication", (ctx) => {
-        HandlePublication(ctx, setOrderBookData, sequenceRef, currentSubscription);
+        const props = {
+          ctx,
+          setOrderBookData,
+          sequenceRef,
+          currentSubscription,
+        };
+        HandlePublication(props);
       });
 
       currentSubscription.on("error", (ctx) => {
@@ -61,7 +72,13 @@ export default function useOrderBook() {
     );
 
     // Update the order book data
-    SetRenderOrderBookData(setOrderBookData, renderAsks, renderBids, averagePrice);
+    const props = {
+      setOrderBookData,
+      renderAsks,
+      renderBids,
+      averagePrice,
+    };
+    SetRenderOrderBookData(props);
   }, [orderBookData.asks, orderBookData.bids]);
 
   return orderBookData;

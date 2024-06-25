@@ -19,7 +19,7 @@ Another difficulty was the fact special and border cases are not easy to replica
 ## Improvements
 Following the last section's idea, there are still some improvements to make, mostly when it comes to socket's disconnections and sequence's violations.
 
-Also, error handling should be implemented in a proper way in case this code was to be used in production environments. Another point is that the average price calculation should be revised.
+Error handling should be implemented in a proper way in case this code was to be used in production environments. Another point is that the average price calculation should be revised. Also, tests should be implemented for best practices.
 
 Regarding the UI, even though the style is quite well accomplished, more indicators like colors and font bolding have to be added to communicate the changes more clearly.
 

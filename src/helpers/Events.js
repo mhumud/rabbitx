@@ -1,6 +1,7 @@
 import { SmartMerge } from "./Helpers";
 
-export function HandleSubscription(ctx, setOrderBookData, sequenceRef) {
+export function HandleSubscription(props) {
+  const { ctx, setOrderBookData, sequenceRef } = props;
   const { data } = ctx;
   if (data) {
     const { asks: initialAsks, bids: initialBids, sequence } = data;
@@ -18,12 +19,8 @@ export function HandleSubscription(ctx, setOrderBookData, sequenceRef) {
   }
 }
 
-export function HandlePublication(
-  ctx,
-  setOrderBookData,
-  sequenceRef,
-  currentSubscription
-) {
+export function HandlePublication(props) {
+  const { ctx, setOrderBookData, sequenceRef, currentSubscription } = props;
   const { data } = ctx;
   if (data) {
     const { asks: newAsks, bids: newBids, sequence } = data;
@@ -42,11 +39,11 @@ export function HandlePublication(
       setOrderBookData((prevState) => ({
         ...prevState,
         asks: newAsks.reduce(
-          (acc, newAsk) => SmartMerge(newAsk, acc, "Ask"),
+          (acc, newAsk) => SmartMerge(newAsk, acc),
           prevState.asks
         ),
         bids: newBids.reduce(
-          (acc, newBid) => SmartMerge(newBid, acc, "Bid"),
+          (acc, newBid) => SmartMerge(newBid, acc),
           prevState.bids
         ),
       }));
@@ -57,16 +54,12 @@ export function HandlePublication(
   }
 }
 
-export function SetRenderOrderBookData(
-  setOrderBookData,
-  renderAsks,
-  renderBids,
-  averagePrice
-) {
+export function SetRenderOrderBookData(props) {
+  const { setOrderBookData, renderAsks, renderBids, averagePrice } = props;
   setOrderBookData((prevState) => {
     const { averageColor: prevAverageColor, averagePrice: prevAveragePrice } =
       prevState;
-  
+
     // Calculation to change the color of the average more smoothly
     const difference = parseInt(averagePrice) - parseInt(prevAveragePrice);
     const averageColor =

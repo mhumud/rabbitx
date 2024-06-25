@@ -1,5 +1,5 @@
 // Function that merges a new order with previous orders
-export function SmartMerge(newOrder, orders, type = "") {
+export function SmartMerge(newOrder, orders) {
   const newPrice = parseFloat(newOrder[0]);
   const newAmount = parseFloat(newOrder[1]);
   // Try to find order

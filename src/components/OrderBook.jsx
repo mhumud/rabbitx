@@ -1,5 +1,7 @@
 import "./OrderBook.css";
 import useOrderBook from "./useOrderBook";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 function OrderBook() {
   const { renderAsks, renderBids, averagePrice, averageColor } = useOrderBook();
@@ -45,8 +47,13 @@ function OrderBook() {
         <thead>
           <tr className={`lower-header ${averageColor}`}>
             <th className="price">
+              {averageColor === "average-price-down" ? (
+                <SouthEastIcon fontSize="medium" className="mx-2"/>
+              ) : averageColor === "average-price-up" ? (
+                <NorthEastIcon fontSize="medium" className="mx-2"/>
+              ) : null}
               {averagePrice > 0
-                ? parseInt(averagePrice).toLocaleString()
+                ? Math.round(averagePrice).toLocaleString()
                 : null}
             </th>
             <th className="amount"></th>

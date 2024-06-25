@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+This project is an OrderBook UI that connects to RabbitX to then render the asks and bids in a beautiful way.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objectives
+In the development of this project the following objectives were addressed:
+- Connect to RabbitX via WebSockets: To obtain the events from RabbitX the library `centrifuge-js` was used. Here, the first step is to get the initial snapshot (when suscribed), to later on update with the new orders (when publications arrive). The use of the sequence number was needed to keep sync of the local OrderBook with the data received from the WebSocket.
+- Build the logic: When new orders arrive, well thought logics had to be implemented to add them in the correct way. But not only that, structures and algorithms had to be crafted for highest effiency.
+- Build the user interface (UI): Once the data is being recorded successfully, a good knowledge is needed to present the orders in a clear and pretty way. Libraries like `TailWind CSS` (devDependency) and `Material UI` (dependency) were used to improve both the code and the UI.
 
-## Available Scripts
+## Approach
+To address this case the first step was to understand how the events are being passed by RabbitX. When that was more clear, the code was written first to optimize and order the incoming data how corresponds. Once the data logic was working, frontend development was started to being used in order to show the data properly on a table.
 
-In the project directory, you can run:
+At the end, special and border cases were started to be analyzed and solved when possible.
 
-### `npm start`
+## Challenges faced
+After thinking the order's logic was correct, new information was found to indicate that the whole logic was not working as expected. One example, and the most notorious one, is realizing that the first step was to load the initial snapshot to then add the updates afterwards.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Another difficulty was the fact special and border cases are not easy to replicate, specially when working with WebSockets. Eventhough it is possible to induce problems and errors, more time would have been needed to go deeper into these weird cases.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Improvements
+Following the last section's idea, there are still some improvements to make, mostly when it comes to socket's disconnections and sequence's violations.
 
-### `npm test`
+Also, error handling should be implemented in a proper way in case this code was to be used in production environments. Another point is that the average price calculation should be revised.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Regarding the UI, even though the style is quite well accomplished, more indicators like colors and font bolding have to be added to communicate the changes more clearly.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Takeaways
+Afterall it was an interesting case that required many different developing skills; from frontend views to backend logics, and always following the best coding practices.

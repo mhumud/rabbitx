@@ -1,8 +1,5 @@
 // Function that merges a new order with previous orders
 export function SmartMerge(newOrder, orders, type = "") {
-  // Leave a log on the client side
-  // console.log(type, newOrder);
-
   const newPrice = parseFloat(newOrder[0]);
   const newAmount = parseFloat(newOrder[1]);
   // Try to find order
@@ -17,9 +14,6 @@ export function SmartMerge(newOrder, orders, type = "") {
       copyOrders[previousOrderIndex][1] = newAmount;
     } else {
       copyOrders.splice(previousOrderIndex, 1);
-
-      // Show when removing an order
-      // console.log(type, " removed: ", newOrder);
     }
     // It is a new order
   } else {
@@ -79,8 +73,8 @@ export function RenderBids(bids, numberOfElements) {
 }
 
 export function GetAveragePrice(renderAsks, renderBids, numberOfElements) {
-  const lastAsk = parseInt(renderAsks[numberOfElements - 1]);
-  const firstBid = parseInt(renderBids[0]);
+  const lastAsk = parseFloat(renderAsks[numberOfElements - 1]);
+  const firstBid = parseFloat(renderBids[0]);
   const averagePrice = (lastAsk + firstBid) / 2;
 
   return averagePrice;

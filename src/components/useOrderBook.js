@@ -26,7 +26,7 @@ export default function useOrderBook() {
     return Connect(subscriptionRef);
   }, []);
 
-  // Add event handling for subscription and publication
+  // Add event handling for subscription, publication and error
   useEffect(() => {
     const currentSubscription = subscriptionRef.current;
     if (currentSubscription) {
@@ -36,6 +36,11 @@ export default function useOrderBook() {
 
       currentSubscription.on("publication", (ctx) => {
         HandlePublication(ctx, setOrderBookData, sequenceRef, currentSubscription);
+      });
+
+      currentSubscription.on("error", (ctx) => {
+        // TODO: Handle errors gracefully
+        console.log(ctx);
       });
     }
   }, []);

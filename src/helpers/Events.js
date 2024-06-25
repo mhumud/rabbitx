@@ -18,7 +18,12 @@ export function HandleSubscription(ctx, setOrderBookData, sequenceRef) {
   }
 }
 
-export function HandlePublication(ctx, setOrderBookData, sequenceRef, currentSubscription) {
+export function HandlePublication(
+  ctx,
+  setOrderBookData,
+  sequenceRef,
+  currentSubscription
+) {
   const { data } = ctx;
   if (data) {
     const { asks: newAsks, bids: newBids, sequence } = data;
@@ -27,12 +32,10 @@ export function HandlePublication(ctx, setOrderBookData, sequenceRef, currentSub
     if (sequence > sequenceRef.current + 1) {
       console.log("Out-of-sequence update. Unsubscribing and resubscribing.");
       // Resuscribe to the events to reset asks, bids and the sequence
-      currentSubscription.unsubscribe(); 
+      currentSubscription.unsubscribe();
       setTimeout(() => {
         currentSubscription.subscribe();
-        console.log('listoo');
       }, 1000); // Add a one second delay before resubscribing to avoid rapid retry
-
 
       // Else, merge the update
     } else {
@@ -51,7 +54,6 @@ export function HandlePublication(ctx, setOrderBookData, sequenceRef, currentSub
       // Update the sequence reference
       sequenceRef.current = sequence;
     }
-
   }
 }
 
@@ -64,11 +66,13 @@ export function SetRenderOrderBookData(
   setOrderBookData((prevState) => {
     const { averageColor: prevAverageColor, averagePrice: prevAveragePrice } =
       prevState;
-
+  
+    // Calculation to change the color of the average more smoothly
+    const difference = parseInt(averagePrice) - parseInt(prevAveragePrice);
     const averageColor =
-      parseInt(averagePrice) > parseInt(prevAveragePrice)
+      difference > 1
         ? "average-price-up"
-        : parseInt(averagePrice) < parseInt(prevAveragePrice)
+        : difference < -1
         ? "average-price-down"
         : prevAverageColor;
 

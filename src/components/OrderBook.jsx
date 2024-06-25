@@ -1,17 +1,24 @@
 import "./OrderBook.css";
-import useOrderBook from "./helpers/userOrderBook";
+import useOrderBook from "./useOrderBook";
 
 function OrderBook() {
   const { renderAsks, renderBids, averagePrice, averageColor } = useOrderBook();
+  const boxClassName = "bg-slate-800	p-0.5 rounded-sm";
 
   return (
     <div className="order-book-container px-2">
       <table className="order-book-table">
         <thead>
           <tr className="header">
-            <th className="price">Price</th>
-            <th className="amount">Amount</th>
-            <th className="total">Total</th>
+            <th className="price">
+              Price <span className={boxClassName}>USD</span>
+            </th>
+            <th className="amount">
+              Amount <span className={boxClassName}>BTC</span>
+            </th>
+            <th className="total">
+              Total <span className={boxClassName}>BTC</span>
+            </th>
           </tr>
         </thead>
         <tbody className="table-body">
